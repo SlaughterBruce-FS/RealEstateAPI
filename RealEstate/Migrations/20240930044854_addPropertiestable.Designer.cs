@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstate.Data;
 
@@ -11,9 +12,11 @@ using RealEstate.Data;
 namespace RealEstate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240930044854_addPropertiestable")]
+    partial class addPropertiestable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,15 +244,16 @@ namespace RealEstate.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Agent_Id")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("Area")
+                    b.Property<int>("Area")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Bathrooms")
+                    b.Property<int>("Bathrooms")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Bedrooms")
+                    b.Property<int>("Bedrooms")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -264,30 +268,34 @@ namespace RealEstate.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Featured_Image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Garages")
+                    b.Property<int>("Garages")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("Is_Published")
+                    b.Property<bool>("Is_Published")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("Is_Rent")
+                    b.Property<bool>("Is_Rent")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("Lot_Size")
+                    b.Property<int>("Lot_Size")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.Property<string>("Prop_Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Prop_Type")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Slug")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
@@ -298,10 +306,11 @@ namespace RealEstate.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Views")
+                    b.Property<int>("Views")
                         .HasColumnType("int");
 
                     b.Property<string>("Year_Built")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Zip")
@@ -370,7 +379,9 @@ namespace RealEstate.Migrations
                 {
                     b.HasOne("RealEstate.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("Agent_Id");
+                        .HasForeignKey("Agent_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

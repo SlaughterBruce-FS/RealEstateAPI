@@ -11,6 +11,7 @@ namespace RealEstate.Data
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Properties> Properties { get; set; }
 
 
     }
