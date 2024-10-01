@@ -12,6 +12,7 @@ namespace RealEstate.Data
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Properties> Properties { get; set; }
+        public DbSet<Tours> Tours { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -36,7 +37,7 @@ namespace RealEstate.Data
                     Lot_Size = 2000,
                     Views = 0,
                     Slug = "house-for-sale",
-                    Agent_Id = "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3",
+                    Agent_Id = "532d1789-c1d9-4d36-bfc1-c2bb4372c7cf",
                     Featured_Image= "https://flawlessrealestate.blob.core.windows.net/realestate/1709011290_pexels-expect-best-323780.jpg"
                 },
                  new Properties
@@ -57,7 +58,7 @@ namespace RealEstate.Data
                      Lot_Size = 2000,
                      Views = 0,
                      Slug = "house-for-sale",
-                     Agent_Id = "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3",
+                     Agent_Id = "532d1789-c1d9-4d36-bfc1-c2bb4372c7cf",
                      Featured_Image = "https://flawlessrealestate.blob.core.windows.net/realestate/1709042821_pexels-jess-loiterton-5007356.jpg"
                  }
                  ,
@@ -79,7 +80,7 @@ namespace RealEstate.Data
                      Lot_Size = 2000,
                      Views = 0,
                      Slug = "house-for-sale",
-                     Agent_Id = "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3",
+                     Agent_Id = "532d1789-c1d9-4d36-bfc1-c2bb4372c7cf",
                      Featured_Image = "https://flawlessrealestate.blob.core.windows.net/realestate/1709042821_pexels-jess-loiterton-5007356.jpg"
                  }
                 );

@@ -15,21 +15,21 @@ namespace RealEstate.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "Agent_Id",
-                value: "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3");
+                value: "532d1789-c1d9-4d36-bfc1-c2bb4372c7cf");
 
             migrationBuilder.UpdateData(
                 table: "Properties",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "Agent_Id",
-                value: "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3");
+                value: "532d1789-c1d9-4d36-bfc1-c2bb4372c7cf");
 
             migrationBuilder.UpdateData(
                 table: "Properties",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "Agent_Id",
-                value: "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3");
+                value: "532d1789-c1d9-4d36-bfc1-c2bb4372c7cf");
         }
 
         /// <inheritdoc />
@@ -40,21 +40,21 @@ namespace RealEstate.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "Agent_Id",
-                value: "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3");
+                value: "532d1789-c1d9-4d36-bfc1-c2bb4372c7cf");
 
             migrationBuilder.UpdateData(
                 table: "Properties",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "Agent_Id",
-                value: "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3");
+                value: "532d1789-c1d9-4d36-bfc1-c2bb4372c7cf");
 
             migrationBuilder.UpdateData(
                 table: "Properties",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "Agent_Id",
-                value: "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3");
+                value: "532d1789-c1d9-4d36-bfc1-c2bb4372c7cf");
         }
     }
 }
