@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstate.Data;
 
@@ -11,9 +12,11 @@ using RealEstate.Data;
 namespace RealEstate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240930152245_reseed")]
+    partial class reseed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -320,7 +323,7 @@ namespace RealEstate.Migrations
                         {
                             Id = 1,
                             Address = "1234 Main St",
-                            Agent_Id = "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3",
+                            Agent_Id = "8720600a-c30a-4502-a0d7-ac38dd9022a2",
                             Bathrooms = 2,
                             Bedrooms = 3,
                             City = "San Francisco",
@@ -342,7 +345,7 @@ namespace RealEstate.Migrations
                         {
                             Id = 2,
                             Address = "1234 Main St",
-                            Agent_Id = "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3",
+                            Agent_Id = "8720600a-c30a-4502-a0d7-ac38dd9022a2",
                             Bathrooms = 2,
                             Bedrooms = 3,
                             City = "San Francisco",
@@ -364,7 +367,7 @@ namespace RealEstate.Migrations
                         {
                             Id = 3,
                             Address = "1234 Main St",
-                            Agent_Id = "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3",
+                            Agent_Id = "8720600a-c30a-4502-a0d7-ac38dd9022a2",
                             Bathrooms = 2,
                             Bedrooms = 3,
                             City = "San Francisco",

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstate.Data;
 
@@ -11,9 +12,11 @@ using RealEstate.Data;
 namespace RealEstate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240930150901_makeagentidnotnull")]
+    partial class makeagentidnotnull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -320,7 +323,7 @@ namespace RealEstate.Migrations
                         {
                             Id = 1,
                             Address = "1234 Main St",
-                            Agent_Id = "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3",
+                            Agent_Id = "8720600a-c30a-4502-a0d7-ac38dd9022a2",
                             Bathrooms = 2,
                             Bedrooms = 3,
                             City = "San Francisco",
@@ -342,29 +345,7 @@ namespace RealEstate.Migrations
                         {
                             Id = 2,
                             Address = "1234 Main St",
-                            Agent_Id = "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3",
-                            Bathrooms = 2,
-                            Bedrooms = 3,
-                            City = "San Francisco",
-                            Date_listed = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "A beautiful house for sale",
-                            Featured_Image = "https://flawlessrealestate.blob.core.windows.net/realestate/1709042821_pexels-jess-loiterton-5007356.jpg",
-                            Lot_Size = 2000,
-                            Price = 100000.0,
-                            Prop_Status = "For Sale",
-                            Prop_Type = "House",
-                            Slug = "house-for-sale",
-                            State = "CA",
-                            Title = "House for sale",
-                            Views = 0,
-                            Year_Built = "2020",
-                            Zip = "94123"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "1234 Main St",
-                            Agent_Id = "6c6b8e57-ffd9-4d3a-9a97-29ba5cb2d2d3",
+                            Agent_Id = "8720600a-c30a-4502-a0d7-ac38dd9022a2",
                             Bathrooms = 2,
                             Bedrooms = 3,
                             City = "San Francisco",

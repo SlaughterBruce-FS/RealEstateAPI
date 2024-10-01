@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace RealEstate.Models
+namespace RealEstate.Models.Dto
 {
-    public class Properties
+    public class CreatePropertyDto
     {
-        [Key]
-        public int Id { get; set; }
+     
         [Required]
         public string Title { get; set; }
         [Required]
@@ -16,15 +15,14 @@ namespace RealEstate.Models
         [Required]
         public string City { get; set; }
         [Required]
-        public  string State { get; set; }
+        public string State { get; set; }
         [Required]
         public string Zip { get; set; }
         [Required]
-        public  double Price { get; set; }
+        public double Price { get; set; }
         [Required]
         public string Agent_Id { get; set; }
-        [ForeignKey("Agent_Id")]
-        public ApplicationUser User { get; set; }
+
         public bool? Is_Published { get; set; }
         public bool? Is_Rent { get; set; }
         public int? Views { get; set; }
@@ -37,8 +35,7 @@ namespace RealEstate.Models
         public int? Area { get; set; }
         public int? Lot_Size { get; set; }
         public string? Year_Built { get; set; }
-        public DateTime Date_listed { get; set; }
-        public string? Featured_Image { get; set; }
 
+        public IFormFile File { get; set; }
     }
 }
