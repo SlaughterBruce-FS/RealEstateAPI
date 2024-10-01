@@ -13,7 +13,7 @@ using RealEstate.Utility;
 
 namespace RealEstate.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {

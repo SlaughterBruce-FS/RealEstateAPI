@@ -29,9 +29,28 @@ namespace RealEstate.Controllers
         [HttpGet]
         public async Task<ActionResult<ApiResponse>> GetProperties()
         {
-            _response.Result = await _db.Properties.ToListAsync();
-            _response.IsSuccess = true;
-            _response.StatusCode = HttpStatusCode.OK;
+            try
+            {
+                var properties = _db.Properties
+                    .Include(u => u.User);
+
+                if(properties == null)
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    return BadRequest(_response);
+                }
+
+                _response.Result =  properties;
+                _response.IsSuccess = true;
+                _response.StatusCode = HttpStatusCode.OK;
+            } catch(Exception ex)
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                return BadRequest(_response);
+            }
+           
             return Ok(_response);
         }
 
@@ -46,7 +65,8 @@ namespace RealEstate.Controllers
             }
 
             var properties = _db.Properties
-                .Where(p => p.Agent_Id == agentId);
+                .Where(p => p.Agent_Id == agentId)
+                .Include(u=>u.User);
 
             if (properties == null)
             {
@@ -75,7 +95,7 @@ namespace RealEstate.Controllers
                 return BadRequest(_response);
             }
 
-            Properties properties = await _db.Properties.FirstOrDefaultAsync(p => p.Id == id);
+            Properties properties = await _db.Properties.Include(u=> u.User).FirstOrDefaultAsync(p => p.Id == id);
 
             if (properties == null)
             {
