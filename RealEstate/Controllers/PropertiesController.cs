@@ -143,7 +143,8 @@ namespace RealEstate.Controllers
                         Is_Published = createProprtyDto.Is_Published,
                         Is_Rent = createProprtyDto.Is_Rent,
                         //Views = createProprtyDto.Views,
-                        Slug = createProprtyDto.Slug,
+                        //Slug = createProprtyDto.Slug,
+                        Slug = createProprtyDto.Address.Trim().ToLower().Replace(" ", "-") + createProprtyDto.Zip.Trim().ToLower().Replace(" ", "-"),
                         Prop_Type = createProprtyDto.Prop_Type,
                         Prop_Status = createProprtyDto.Prop_Status,
                         Bedrooms = createProprtyDto.Bedrooms,
@@ -210,7 +211,7 @@ namespace RealEstate.Controllers
                     propertyFromdb.Price = updatePropertyDto.Price;
                     propertyFromdb.Is_Published = updatePropertyDto.Is_Published;
                     propertyFromdb.Is_Rent = updatePropertyDto.Is_Rent;
-                    propertyFromdb.Slug = updatePropertyDto.Slug;
+                    propertyFromdb.Slug = updatePropertyDto.Address.Trim().ToLower().Replace(" ", "-") + updatePropertyDto.Zip.Trim().ToLower().Replace(" ", "-"),;
                     propertyFromdb.Prop_Type = updatePropertyDto.Prop_Type;
                     propertyFromdb.Prop_Status = updatePropertyDto.Prop_Status;
                     propertyFromdb.Bedrooms = updatePropertyDto.Bedrooms;
@@ -349,4 +350,6 @@ namespace RealEstate.Controllers
         }
 
     }
+
+
 }  
