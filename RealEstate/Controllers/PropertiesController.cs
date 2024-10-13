@@ -105,6 +105,8 @@ namespace RealEstate.Controllers
             }
 
 
+
+
             _response.Result = properties;
             _response.IsSuccess = true;
             _response.StatusCode = HttpStatusCode.OK;
@@ -140,7 +142,7 @@ namespace RealEstate.Controllers
                         Agent_Id = createProprtyDto.Agent_Id,
                         Is_Published = createProprtyDto.Is_Published,
                         Is_Rent = createProprtyDto.Is_Rent,
-                        Views = createProprtyDto.Views,
+                        //Views = createProprtyDto.Views,
                         Slug = createProprtyDto.Slug,
                         Prop_Type = createProprtyDto.Prop_Type,
                         Prop_Status = createProprtyDto.Prop_Status,
@@ -290,5 +292,61 @@ namespace RealEstate.Controllers
             return _response;
 
         }
+
+
+        [HttpPut("views/{id}")]
+        public async Task<ActionResult<ApiResponse>> UpdatePropertyViews(int id,  UpdatePropertyViews updatePropertyViews)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (updatePropertyViews == null || id != updatePropertyViews.Id)
+                    {
+                        _response.StatusCode = HttpStatusCode.BadRequest;
+                        _response.IsSuccess = false;
+                        return BadRequest(_response);
+                    }
+
+                    Properties propertyFromDb = await _db.Properties.FindAsync(id);
+
+                    if (propertyFromDb == null)
+                    {
+                        _response.StatusCode = HttpStatusCode.NotFound;
+                        _response.IsSuccess = false;
+                        return NotFound(_response);
+                    }
+
+                    // Increment the views count
+                    if(propertyFromDb.Views == null || propertyFromDb.Views == 0)
+                    {
+                        propertyFromDb.Views = 1;
+                    } else
+                    {
+                        propertyFromDb.Views++;
+                    }
+                   
+
+                    await _db.SaveChangesAsync();  // Use async save for better performance
+
+                    _response.StatusCode = HttpStatusCode.NoContent; // You might want to return a 204 No Content
+                    return Ok(_response);
+                }
+                else
+                {
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    return BadRequest(_response);
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.StatusCode = HttpStatusCode.InternalServerError;
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
     }
-}
+}  
