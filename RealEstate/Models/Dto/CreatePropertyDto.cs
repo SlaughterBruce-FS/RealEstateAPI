@@ -26,7 +26,7 @@ namespace RealEstate.Models.Dto
         public bool? Is_Published { get; set; }
         public bool? Is_Rent { get; set; }
         public int? Views { get; set; }
-        public string? Slug { get; set; }
+     
         public string? Prop_Type { get; set; }
         public string? Prop_Status { get; set; }
         public int? Bedrooms { get; set; }
