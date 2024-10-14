@@ -296,18 +296,13 @@ namespace RealEstate.Controllers
 
 
         [HttpPut("views/{id}")]
-        public async Task<ActionResult<ApiResponse>> UpdatePropertyViews(int id,  UpdatePropertyViews updatePropertyViews)
+        public async Task<ActionResult<ApiResponse>> UpdatePropertyViews(int id)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (updatePropertyViews == null || id != updatePropertyViews.Id)
-                    {
-                        _response.StatusCode = HttpStatusCode.BadRequest;
-                        _response.IsSuccess = false;
-                        return BadRequest(_response);
-                    }
+              
 
                     Properties propertyFromDb = await _db.Properties.FindAsync(id);
 
