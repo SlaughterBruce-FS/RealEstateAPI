@@ -85,17 +85,17 @@ namespace RealEstate.Controllers
 
         }
 
-        [HttpGet("property/{id}", Name = "GetMyProperty")]
-        public async Task<ActionResult<ApiResponse>> GetMyProperty(int id)
+        [HttpGet("property/{slug}", Name = "GetMyProperty")]
+        public async Task<ActionResult<ApiResponse>> GetMyProperty(string slug)
         {
-            if (id == 0)
+            if (String.IsNullOrEmpty(slug))
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
                 return BadRequest(_response);
             }
 
-            Properties properties = await _db.Properties.Include(u=> u.User).FirstOrDefaultAsync(p => p.Id == id);
+            Properties properties = await _db.Properties.Include(u=> u.User).FirstOrDefaultAsync(p => p.Slug == slug);
 
             if (properties == null)
             {
