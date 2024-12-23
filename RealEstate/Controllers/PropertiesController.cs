@@ -160,7 +160,7 @@ namespace RealEstate.Controllers
                     _db.SaveChanges();
                     _response.Result = createProprtyDto;
                     _response.StatusCode = HttpStatusCode.Created;
-                    return CreatedAtRoute("GetMyProperty", new { id = newProperty.Id }, _response);
+                    return CreatedAtRoute("GetMyProperty", new { slug = newProperty.Slug }, _response);
                 } else
                 {
                     _response.IsSuccess = false;
@@ -296,13 +296,18 @@ namespace RealEstate.Controllers
 
 
         [HttpPut("views/{id}")]
-        public async Task<ActionResult<ApiResponse>> UpdatePropertyViews(int id)
+        public async Task<ActionResult<ApiResponse>> UpdatePropertyViews(int id,  UpdatePropertyViews updatePropertyViews)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-              
+                    if (updatePropertyViews == null || id != updatePropertyViews.Id)
+                    {
+                        _response.StatusCode = HttpStatusCode.BadRequest;
+                        _response.IsSuccess = false;
+                        return BadRequest(_response);
+                    }
 
                     Properties propertyFromDb = await _db.Properties.FindAsync(id);
 

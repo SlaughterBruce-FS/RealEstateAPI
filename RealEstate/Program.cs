@@ -51,6 +51,14 @@ builder.Services.AddCors(options =>
         policyBuilder.AllowAnyHeader();
            policyBuilder.AllowAnyMethod();
     });
+
+    options.AddPolicy("vercel", policyBuilder =>
+    {
+        // policy for nextjs
+        policyBuilder.WithOrigins("https://realestateweb-gw1mqq7xy-slaughterbrucefs-projects.vercel.app");
+        policyBuilder.AllowAnyHeader();
+        policyBuilder.AllowAnyMethod();
+    });
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -93,7 +101,7 @@ app.UseSwagger();
 
 if (app.Environment.IsDevelopment())
 {
-
+    app.UseSwagger();
     app.UseSwaggerUI();
 }
 else
@@ -113,5 +121,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors("nextjs");
+app.UseCors("vercel");
 
 app.Run();
