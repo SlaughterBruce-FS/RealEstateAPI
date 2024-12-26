@@ -53,6 +53,13 @@ namespace RealEstate.Controllers
                 NormalizedEmail = model.UserName.ToUpper(),
                 First_Name = model.First_Name,
                 Last_Name = model.Last_Name,
+                UserProfile = new UserProfiles
+                {
+                    UserName = model.UserName,
+                    Email = model.UserName,
+                    FirstName = model.First_Name,
+                    LastName = model.Last_Name,
+                }
             };
 
             try
@@ -66,12 +73,13 @@ namespace RealEstate.Controllers
                         // create roles in datbase if they dont exist
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Agent));
+            
                     }
                     if (model.Role.ToLower() == SD.Role_Admin)
                     {
                         await _userManager.AddToRoleAsync(newUser, SD.Role_Admin);
                     }
-                    else
+                   else
                     {
                         await _userManager.AddToRoleAsync(newUser, SD.Role_Agent);
                     }
@@ -83,7 +91,10 @@ namespace RealEstate.Controllers
             }
             catch (Exception ex)
             {
-
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Something went wrong first registering");
+                return BadRequest(_response);
             }
 
             _response.StatusCode = HttpStatusCode.BadRequest;

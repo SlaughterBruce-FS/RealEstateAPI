@@ -13,6 +13,7 @@ namespace RealEstate.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Properties> Properties { get; set; }
         public DbSet<Tours> Tours { get; set; }
+        public DbSet<UserProfiles> UserProfiles { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

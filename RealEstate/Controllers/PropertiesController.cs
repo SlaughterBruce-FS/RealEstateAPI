@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RealEstate.Data;
@@ -7,7 +7,6 @@ using RealEstate.Models.Dto;
 using RealEstate.Services;
 using RealEstate.Utility;
 using System.Net;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace RealEstate.Controllers
 {
@@ -32,7 +31,9 @@ namespace RealEstate.Controllers
             try
             {
                 var properties = _db.Properties
-                    .Include(u => u.User);
+                    .Include(u=> u.User)
+
+           ;
 
                 if(properties == null)
                 {
@@ -185,12 +186,12 @@ namespace RealEstate.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (updatePropertyDto == null || id != updatePropertyDto.Id )
-                    {
-                        _response.StatusCode = HttpStatusCode.BadRequest;
-                        _response.IsSuccess = false;
-                        return BadRequest();
-                    }
+                    //if (updatePropertyDto == null || id != updatePropertyDto.Id )
+                    //{
+                    //    _response.StatusCode = HttpStatusCode.BadRequest;
+                    //    _response.IsSuccess = false;
+                    //    return BadRequest();
+                    //}
                     //string fileName = $"{Guid.NewGuid()}{Path.GetExtension(createProprtyDto.File.FileName)}";
 
                     Properties propertyFromdb = await _db.Properties.FindAsync(id);

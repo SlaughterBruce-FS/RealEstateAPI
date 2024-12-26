@@ -24,6 +24,7 @@ namespace RealEstate.Migrations
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Properties_AspNetUsers_Agent_Id",
+
                 table: "Properties",
                 column: "Agent_Id",
                 principalTable: "AspNetUsers",

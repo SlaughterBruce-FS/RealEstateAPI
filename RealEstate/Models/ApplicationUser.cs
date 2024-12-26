@@ -6,5 +6,6 @@ namespace RealEstate.Models
     {
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
+        public UserProfiles UserProfile { get; set; }
     }
 }

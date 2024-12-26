@@ -31,7 +31,7 @@ namespace RealEstate.Controllers
                 return BadRequest(_response);
             }
 
-            var user = await _db.Users.FirstOrDefaultAsync(p => p.Id == userId);
+            var user = await _db.UserProfiles.FirstOrDefaultAsync(p => p.UserId == userId);
 
             if (user == null)
             {
@@ -56,7 +56,7 @@ namespace RealEstate.Controllers
         {
             try
             {
-                var users = _db.Users;
+                var users = _db.UserProfiles;
 
                 if (users == null)
                 {
@@ -65,16 +65,9 @@ namespace RealEstate.Controllers
                     return BadRequest(_response);
                 }
 
-                // Mapping users to AgentDto
-                var agentDtos = users.Select(user => new AgentDto
-                {
-                    Id = user.Id,
-                    FirstName = user.First_Name,
-                    LastName = user.Last_Name,
-                    UserName = user.UserName
-                }).ToList();
+             
 
-                _response.Result = agentDtos;
+                _response.Result = users;
                 _response.IsSuccess = true;
                 _response.StatusCode = HttpStatusCode.OK;
             }
@@ -87,6 +80,9 @@ namespace RealEstate.Controllers
 
             return Ok(_response);
         }
+
+
+    
     }
     
 }

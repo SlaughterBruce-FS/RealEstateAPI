@@ -24,7 +24,7 @@ namespace RealEstate.Models
         [Required]
         public string Agent_Id { get; set; }
         [ForeignKey("Agent_Id")]
-        public ApplicationUser User { get; set; }
+        public UserProfiles User { get; set; }
         public bool? Is_Published { get; set; }
         public bool? Is_Rent { get; set; }
         public int Views { get; set; } = 0;

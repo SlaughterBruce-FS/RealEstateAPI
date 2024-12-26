@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstate.Data;
 
@@ -11,9 +12,11 @@ using RealEstate.Data;
 namespace RealEstate.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241225175609_UserProfilesToDB")]
+    partial class UserProfilesToDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -429,8 +432,11 @@ namespace RealEstate.Migrations
 
             modelBuilder.Entity("RealEstate.Models.UserProfiles", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -451,11 +457,17 @@ namespace RealEstate.Migrations
                     b.Property<string>("Profile_Image")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserProfiles");
                 });
@@ -513,7 +525,7 @@ namespace RealEstate.Migrations
 
             modelBuilder.Entity("RealEstate.Models.Properties", b =>
                 {
-                    b.HasOne("RealEstate.Models.UserProfiles", "User")
+                    b.HasOne("RealEstate.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("Agent_Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -544,18 +556,12 @@ namespace RealEstate.Migrations
             modelBuilder.Entity("RealEstate.Models.UserProfiles", b =>
                 {
                     b.HasOne("RealEstate.Models.ApplicationUser", "User")
-                        .WithOne("UserProfile")
-                        .HasForeignKey("RealEstate.Models.UserProfiles", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("RealEstate.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("UserProfile")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

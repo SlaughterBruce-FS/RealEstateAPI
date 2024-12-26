@@ -6,8 +6,7 @@ namespace RealEstate.Models.Dto
     public class UpdatePropertyDto
     {
 
-        [Key]
-        public int Id { get; set; }
+       
         [Required]
         public string Title { get; set; }
         [Required]
@@ -34,7 +33,7 @@ namespace RealEstate.Models.Dto
         public int? Area { get; set; }
         public int? Lot_Size { get; set; }
         public string? Year_Built { get; set; }
-        [Required]
-        public IFormFile File { get; set; }
+     
+        public IFormFile? File { get; set; }
     }
 }

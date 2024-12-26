@@ -5,6 +5,7 @@
         public const string SD_STORAGE_CONTAINER = "realestate";
         public const string Role_Agent = "agent";
         public const string Role_Admin = "admin";
+        public const string Role_Customer = "customer";
 
 
         public const string status_pending = "Pending";
