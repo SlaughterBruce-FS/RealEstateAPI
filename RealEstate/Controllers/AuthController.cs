@@ -70,40 +70,62 @@ namespace RealEstate.Controllers
                 {
                     if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
                     {
-                        // create roles in datbase if they dont exist
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Agent));
-            
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer));
                     }
+
                     if (model.Role.ToLower() == SD.Role_Admin)
                     {
                         await _userManager.AddToRoleAsync(newUser, SD.Role_Admin);
                     }
-                   else
+                    else if (model.Role.ToLower() == SD.Role_Agent)
                     {
                         await _userManager.AddToRoleAsync(newUser, SD.Role_Agent);
+                    }
+                    else if (model.Role.ToLower() == SD.Role_Customer)
+                    {
+                        await _userManager.AddToRoleAsync(newUser, SD.Role_Customer);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(newUser, SD.Role_Customer);
                     }
 
                     _response.StatusCode = HttpStatusCode.OK;
                     _response.IsSuccess = true;
                     return Ok(_response);
                 }
+                else
+                {
+                    // Log the errors from the result
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages.AddRange(result.Errors.Select(e => e.Description));
+                    return BadRequest(_response);
+                }
             }
             catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
-                _response.ErrorMessages.Add("Something went wrong first registering");
+
+                // Log the inner exception details
+                if (ex.InnerException != null)
+                {
+                    _response.ErrorMessages.Add(ex.InnerException.Message);
+                }
+                else
+                {
+                    _response.ErrorMessages.Add(ex.Message);
+                }
+
                 return BadRequest(_response);
             }
+            }
 
-            _response.StatusCode = HttpStatusCode.BadRequest;
-            _response.IsSuccess = false;
-            _response.ErrorMessages.Add("Something went wrong registering");
-            return BadRequest(_response);
-        }
 
-        [HttpPost("login")]
+            [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto model)
         {
             ApplicationUser userfromdb = _db.ApplicationUsers.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());

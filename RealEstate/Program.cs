@@ -55,7 +55,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("vercel", policyBuilder =>
     {
         // policy for nextjs
-        policyBuilder.WithOrigins("https://realestateweb-gw1mqq7xy-slaughterbrucefs-projects.vercel.app");
+        policyBuilder.WithOrigins("https://realestateweb-theta.vercel.app");
         policyBuilder.AllowAnyHeader();
         policyBuilder.AllowAnyMethod();
     });

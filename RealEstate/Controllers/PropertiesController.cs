@@ -212,6 +212,7 @@ namespace RealEstate.Controllers
                     propertyFromdb.Price = updatePropertyDto.Price;
                     propertyFromdb.Is_Published = updatePropertyDto.Is_Published;
                     propertyFromdb.Is_Rent = updatePropertyDto.Is_Rent;
+                    propertyFromdb.Agent_Id = updatePropertyDto.Agent_Id;
                     propertyFromdb.Slug = updatePropertyDto.Address.Trim().ToLower().Replace(" ", "-") +"-"+ updatePropertyDto.Zip.Trim().ToLower().Replace(" ", "-");
                     propertyFromdb.Prop_Type = updatePropertyDto.Prop_Type;
                     propertyFromdb.Prop_Status = updatePropertyDto.Prop_Status;

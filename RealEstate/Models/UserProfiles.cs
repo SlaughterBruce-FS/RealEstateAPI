@@ -20,5 +20,6 @@ namespace RealEstate.Models
         public string Phone { get; set; } = string.Empty;
         public string? Profile_Image { get; set; }
 
+
     }
 }

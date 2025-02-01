@@ -23,7 +23,7 @@ namespace RealEstate.Models.Dto
         public double Price { get; set; }
         public bool? Is_Published { get; set; }
         public bool? Is_Rent { get; set; }
-
+        public string Agent_Id { get; set; }
         public string? Slug { get; set; }
         public string? Prop_Type { get; set; }
         public string? Prop_Status { get; set; }
