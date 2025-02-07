@@ -59,6 +59,7 @@ namespace RealEstate.Controllers
                     Email = model.UserName,
                     FirstName = model.First_Name,
                     LastName = model.Last_Name,
+                    Role = model.Role == null ? "customer" : model.Role,
                 }
             };
 

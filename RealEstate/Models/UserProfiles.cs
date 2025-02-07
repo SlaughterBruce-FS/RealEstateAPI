@@ -19,7 +19,7 @@ namespace RealEstate.Models
         public string LastName { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public string? Profile_Image { get; set; }
-
+        public string Role { get; set; }
 
     }
 }

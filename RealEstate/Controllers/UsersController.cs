@@ -61,7 +61,7 @@ namespace RealEstate.Controllers
         {
             try
             {
-                var users = _db.UserProfiles;
+                var users = _db.UserProfiles.Where(u => u.Role == "agent");
 
                 if (users == null)
                 {
