@@ -57,13 +57,23 @@ namespace RealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ApiResponse>> GetAgents()
+        public async Task<ActionResult<ApiResponse>> GetAgents(string role = null)
         {
+
             try
             {
-                var users = _db.UserProfiles.Where(u => u.Role == "agent");
+                IQueryable<UserProfiles> usersQuery = _db.UserProfiles;
 
-                if (users == null)
+                if(!string.IsNullOrEmpty(role))
+                {
+                      usersQuery = usersQuery.Where(p => p.Role == role.ToLower());
+                }
+
+                var users = usersQuery.ToList();
+
+                
+
+                if (users == null || users.Count == 0)
                 {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;

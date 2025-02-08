@@ -26,34 +26,44 @@ namespace RealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ApiResponse>> GetProperties()
+        public async Task<ActionResult<ApiResponse>> GetProperties(int page = 1, int pageSize = 2)
         {
             try
             {
                 var properties = _db.Properties
-                    .Include(u=> u.User)
+                    .Include(u => u.User);
 
-           ;
+                var totalCount = properties.Count();
+                var totalPages = 0;
 
-                if(properties == null)
+                if (totalCount > 0)
+                {
+                    totalPages = (int)Math.Ceiling((decimal)totalCount / pageSize);
+                }
+
+                if (properties == null)
                 {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
 
-                _response.Result =  properties;
+                _response.Result = properties.Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 _response.IsSuccess = true;
                 _response.StatusCode = HttpStatusCode.OK;
-            } catch(Exception ex)
+                _response.Page = page;
+                _response.TotalPages = totalPages;
+            }
+            catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
                 return BadRequest(_response);
             }
-           
+
             return Ok(_response);
         }
+
 
         [HttpGet("agent/{agentId}", Name = "GetMyProperties")]
         public async Task<ActionResult<ApiResponse>> GetMyProperties(string? agentId)
