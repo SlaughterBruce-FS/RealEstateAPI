@@ -49,7 +49,7 @@ builder.Services.AddCors(options =>
         // policy for nextjs
         policyBuilder.WithOrigins("http://localhost:3000");
         policyBuilder.AllowAnyHeader();
-           policyBuilder.AllowAnyMethod();
+        policyBuilder.AllowAnyMethod();
     });
 
     options.AddPolicy("vercel", policyBuilder =>

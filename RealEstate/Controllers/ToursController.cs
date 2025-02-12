@@ -53,7 +53,7 @@ namespace RealEstate.Controllers
             return Ok(_response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name ="GetTour")]
         public async Task<ActionResult<ApiResponse>> GetTour(int id)
         {
             if(id == 0)
@@ -125,8 +125,8 @@ namespace RealEstate.Controllers
                 _db.Tours.Add(tourToCreate);
                 await _db.SaveChangesAsync();
                 _response.IsSuccess = true;
-                _response.StatusCode = HttpStatusCode.OK;
-                _response.Result = tourToCreate;
+                _response.StatusCode = HttpStatusCode.Created;
+                _response.Result = toursCreateDto;
                 return CreatedAtRoute("GetTour", new { id = tourToCreate.Id }, _response);
 
             } catch (Exception ex)
@@ -136,7 +136,7 @@ namespace RealEstate.Controllers
                 _response.ErrorMessages = new List<string>() { ex.ToString() };
                 return BadRequest(_response);
             }
-            return _response;
+          
         }
 
     }
