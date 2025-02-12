@@ -26,7 +26,7 @@ namespace RealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ApiResponse>> GetProperties(int page = 1, int pageSize = 2)
+        public async Task<ActionResult<ApiResponse>> GetProperties(int page = 1, int pageSize = 25)
         {
             try
             {

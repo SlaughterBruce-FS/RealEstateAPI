@@ -14,7 +14,7 @@ namespace RealEstate.Models
         [Required]
         public string AgentId { get; set; }
         [ForeignKey("AgentId")]
-        public ApplicationUser User { get; set; }
+        public UserProfiles User { get; set; }
         [Required]
         public DateOnly Tour_Date { get; set; }
         [Required]

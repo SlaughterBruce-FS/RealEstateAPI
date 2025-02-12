@@ -23,25 +23,43 @@ namespace RealEstate.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ApiResponse>> GetTours()
+        public async Task<ActionResult<ApiResponse>> GetTours(int page = 1, int pageSize = 25, DateTime? tourDate = null)
         {
             try
             {
-                var tours = _db.Tours
-                    .Include(u => u.User)
-                    .Include(p=> p.Properties);
+                
+                    IQueryable<Tours> toursQuery = _db.Tours
+                        .Include(u => u.User)
+                        .Include(p => p.Properties);
 
-                if (tours == null)
-                {
-                    _response.StatusCode = HttpStatusCode.BadRequest;
-                    _response.IsSuccess = false;
-                    return BadRequest(_response);
-                }
+                    if (tourDate.HasValue)
+                    {
+                        toursQuery = toursQuery.Where(t => t.Tour_Date == DateOnly.FromDateTime(tourDate.Value));
+                    }
 
-                _response.Result = tours;
-                _response.IsSuccess = true;
-                _response.StatusCode = HttpStatusCode.OK;
-            }
+                    var totalCount = toursQuery.Count();
+                    var totalPages = 0;
+
+                    if (totalCount > 0)
+                    {
+                        totalPages = (int)Math.Ceiling((decimal)totalCount / pageSize);
+                    }
+
+                    var tours = toursQuery.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+                    if (tours == null || tours.Count == 0)
+                    {
+                        _response.StatusCode = HttpStatusCode.BadRequest;
+                        _response.IsSuccess = false;
+                        return BadRequest(_response);
+                    }
+
+                    _response.Result = tours;
+                    _response.IsSuccess = true;
+                    _response.StatusCode = HttpStatusCode.OK;
+                    _response.Page = page;
+                    _response.TotalPages = totalPages;
+                   }
             catch (Exception ex)
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
